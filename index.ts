@@ -1,4 +1,4 @@
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap, take, first, last, filter } from 'rxjs/operators';
 import { of, from, timer, interval } from 'rxjs';
 
 // OF - CREATION OPERATOR ----------------------------------------------------------------------
@@ -46,8 +46,41 @@ import { of, from, timer, interval } from 'rxjs';
 // case1.subscribe((value) => {console.log(value);});
 
 //TAP - PIPE OPERATOR --------------------------------------------------------------------------------
-const arr = [1, 2, 3];
-const fromArr$ = from(arr);
-fromArr$
-  .pipe(tap((value) => console.log('Received value: ', value)))
-  .subscribe((value) => console.log(`Emitted Values: `, value));
+// const arr = [1, 2, 3];
+// const fromArr$ = from(arr);
+// fromArr$
+//   .pipe(tap((value) => console.log('Received value: ', value)))
+//   .subscribe((value) => console.log(`Emitted Values: `, value));
+
+//TAKE - PIPE OPERATOR ---------------------------------------------------------------------------------
+// const arr = [1, 2, 3];
+// const fromArr$ = from(arr);
+// fromArr$
+//   .pipe(take(2))
+//   .subscribe((value) => console.log(`Emitted Values: `, value));
+
+//FIRST - PIPE OPERATOR ---------------------------------------------------------------------------------
+// const arr = [1, 2, 3];
+// const fromArr$ = from(arr);
+// fromArr$
+//   .pipe(first())
+//   .subscribe((value) => console.log(`Emitted Values: `, value));
+
+//LAST - PIPE OPERATOR ---------------------------------------------------------------------------------
+// const arr = [1, 2, 3];
+// const fromArr$ = from(arr);
+// fromArr$
+//   .pipe(last())
+//   .subscribe((value) => console.log(`Emitted Values: `, value));
+
+// FILTER - PIPE OPERATOR ------------------------------------------------------------------------------
+// const source = from([1, 2, 3, 4, 5, 6, 7, 8]);
+// const example = source.pipe(filter((num) => num % 2 === 0));
+// example.subscribe((val) => console.log(`Even number: ${val}`));
+
+// const source = from([
+//   { name: 'Joe', age: 31 },
+//   { name: 'Bob', age: 25 },
+// ]);
+// const example = source.pipe(filter((person) => person.age >= 30));
+// example.subscribe((val) => console.log(`Over 30: ${val.name}`));
