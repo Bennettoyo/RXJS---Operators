@@ -1,5 +1,18 @@
-import { map, switchMap, tap, take, first, last, filter } from 'rxjs/operators';
-import { of, from, timer, interval } from 'rxjs';
+import {
+  map,
+  switchMap,
+  tap,
+  take,
+  first,
+  last,
+  filter,
+  startWith,
+  withLatestFrom,
+  catchError,
+  distinctUntilChanged,
+} from 'rxjs/operators';
+import { of, from, timer, interval, throwError } from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 
 // OF - CREATION OPERATOR ----------------------------------------------------------------------
 
@@ -84,3 +97,41 @@ import { of, from, timer, interval } from 'rxjs';
 // ]);
 // const example = source.pipe(filter((person) => person.age >= 30));
 // example.subscribe((val) => console.log(`Over 30: ${val.name}`));
+
+//STARTWITH PIPE OPERATOR ---------------------------------------------------------------------------------
+// const source = of(1, 2, 3);
+// const example = source.pipe(startWith(0));
+// example.subscribe((val) => console.log(val));
+
+// WITHLATESTFROM PIPE OPERATOR -----------------------------------------------------------------------------
+// const source = interval(5000);
+// const secondSource = interval(1000);
+// const example = source.pipe(
+//   withLatestFrom(secondSource),
+//   map(([first, second]) => {
+//     return `First Source (5s): ${first} Second Source (1s): ${second}`;
+//   })
+// );
+// example.subscribe(val => console.log(val));
+
+// AJAX CREATION OPERATOR ----------------------------------------------------------------------------------
+// const githubUsers = `https://api.github.com/users?per_page=2`;
+// const users = ajax(githubUsers);
+// const subscribe = users.subscribe(
+//   res => console.log(res),
+//   err => console.error(err)
+// );
+
+//CATCH/CATCHERROR CREATION/PIPE OPERATOR -------------------------------------------------------------------
+// const source = throwError('This is an error!');
+// const example = source.pipe(catchError((val) => of(`I caught: ${val}`)));
+// const subscribe = example.subscribe((val) => console.log(val));
+
+//DISTINCTUNTILCHANGED PIPE OPERATOR ------------------------------------------------------------------------
+// const source$ = from([1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3]);
+// source$.pipe(distinctUntilChanged()).subscribe(console.log);
+
+// const sampleObject = { name: 'Test' };
+// const sampleObject2 = { name: 'Test2' };
+// const source$ = from([sampleObject, sampleObject, sampleObject2, sampleObject]);
+// source$.pipe(distinctUntilChanged()).subscribe(console.log);
